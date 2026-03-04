@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Escultores</title>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            font-family: Arial;
+            background-color: #f4f4f4;
+            text-align: center;
+        }
+
+        h1 { color: #333; }
+
+        h2 {
+            color: #555;
+            margin-top: 40px;
+            border-bottom: 2px solid #ccc;
+            padding-bottom: 8px;
+            width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .form-container {
+            margin: 20px auto;
+            width: 400px;
+        }
+
+        .form-group {
+            margin-bottom: 12px;
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 4px;
+            color: #333;
+        }
+
+        input[type="text"] {
+            padding: 8px 12px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            width: 100%;
+        }
+
+        button {
+            padding: 8px 20px;
+            font-size: 16px;
+            background-color: #333;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-top: 10px;
+            width: 100%;
+        }
+
+        button:hover { background-color: #555; }
+
+        .card {
+            background: white;
+            margin: 15px auto;
+            padding: 15px;
+            width: 400px;
+            border-radius: 10px;
+            box-shadow: 2px 2px 8px gray;
+            text-align: left;
+        }
+
+        .card p { margin: 6px 0; }
+
+        .card .tipo {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 8px;
+        }
+
+        .divider {
+            width: 400px;
+            margin: 40px auto;
+            border: none;
+            border-top: 2px dashed #ccc;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Tipos de Escultores</h1>
+
+<!-- PARTE 1 - INTERFACES -->
+<h2>Parte 1 — Interfaces</h2>
+
+<div class="form-container">
+    <form action="/escultores" method="get">
+        <div class="form-group">
+            <label>Escultor en Mármol:</label>
+            <input type="text" name="nombreMarmol" placeholder="Escribe un nombre..." th:value="${nombreMarmol}"/>
+        </div>
+        <div class="form-group">
+            <label>Escultor en Madera:</label>
+            <input type="text" name="nombreMadera" placeholder="Escribe un nombre..." th:value="${nombreMadera}"/>
+        </div>
+        <div class="form-group">
+            <label>Escultor Digital:</label>
+            <input type="text" name="nombreDigital" placeholder="Escribe un nombre..." th:value="${nombreDigital}"/>
+        </div>
+        <button type="submit">Buscar</button>
+    </form>
+</div>
+
+<div th:each="escultor : ${escultores}" class="card">
+    <p th:text="${escultor.crearEscultura()}"></p>
+</div>
+
+<hr class="divider"/>
+
+<!-- PARTE 2 - CLASES ABSTRACTAS -->
+<h2>Parte 2 — Clases Abstractas</h2>
+
+<div class="form-container">
+    <form action="/escultores/abstractas" method="get">
+        <div class="form-group">
+            <label>Escultor en Mármol:</label>
+            <input type="text" name="nombreMarmol" placeholder="Escribe un nombre..." th:value="${nombreMarmolAbs}"/>
+        </div>
+        <div class="form-group">
+            <label>Escultor en Madera:</label>
+            <input type="text" name="nombreMadera" placeholder="Escribe un nombre..." th:value="${nombreMaderaAbs}"/>
+        </div>
+        <div class="form-group">
+            <label>Escultor Digital:</label>
+            <input type="text" name="nombreDigital" placeholder="Escribe un nombre..." th:value="${nombreDigitalAbs}"/>
+        </div>
+        <button type="submit">Buscar</button>
+    </form>
+</div>
+
+<div th:each="escultor : ${escultoresAbstractos}" class="card">
+    <p class="tipo" th:text="${escultor.materialPrincipal}"></p>
+    <p th:text="${escultor.presentarse()}"></p>
+    <p th:text="${escultor.crearEscultura()}"></p>
+</div>
+
+</body>
+</html>
